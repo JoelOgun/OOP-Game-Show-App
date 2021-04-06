@@ -59,7 +59,7 @@ won
 */
   checkForWin() {
     const letterLeft = document.querySelectorAll(".hide");
-    if ((letterLeft = 0)) {
+    if (letterLeft.length === 0) {
       return true;
     } else {
       return false;
@@ -72,8 +72,10 @@ won
    */
   removeLife() {
     this.missed++;
-    const lives = document.querySelectorAll(".tries");
-    lives[this.missed].src = "images/lostHeart.png";
+    let lives = document.querySelector(".tries");
+    let heart = lives.firstChild;
+    lives.classList.remove("tries");
+    heart.src = "images/lostHeart.png";
     if (this.missed === 5) {
       this.gameOver();
     }
@@ -83,5 +85,17 @@ won
    * Displays game over message
    * @param {boolean} gameWon - Whether or not the user won the game
    */
-  //gameOver(gameWon) {};
+  gameOver(gameWon) {
+    const overlay = document.querySelector("#overlay");
+    if (gameWon) {
+      overlay.className = "win";
+      overlay.querySelector("h1").textContent =
+        "Can you guess the phrase Winner?! Congratulations";
+    } else {
+      overlay.className = "lose";
+      overlay.querySelector("h1").textContent = "Sorry try again";
+    }
+
+    this.resetGame();
+  }
 }
