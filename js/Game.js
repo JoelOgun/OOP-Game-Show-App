@@ -85,17 +85,22 @@ won
    * Displays game over message
    * @param {boolean} gameWon - Whether or not the user won the game
    */
-  gameOver(gameWon) {
-    const overlay = document.querySelector("#overlay");
-    if (gameWon) {
-      overlay.className = "win";
-      overlay.querySelector("h1").textContent =
-        "Can you guess the phrase Winner?! Congratulations";
-    } else {
-      overlay.className = "lose";
-      overlay.querySelector("h1").textContent = "Sorry try again";
-    }
 
-    this.resetGame();
+  gameOver(gameWon) {
+    const overLay = document.getElementById("overlay");
+    overLay.style.display = "";
+    overLay.style.opacity = 1;
+    overLay.style.transition = "all 1s";
+    setTimeout(() => {
+      overLay.style.opacity = 1;
+    }, 100);
+    const h1 = document.getElementById("game-over-message");
+    if (gameWon) {
+      overLay.className = "win";
+      h1.textContent = "Can you guess the phrase Winner? Congratulations !!";
+    } else {
+      overLay.className = "lose";
+      h1.textContent = "Sorry try again";
+    }
   }
 }
