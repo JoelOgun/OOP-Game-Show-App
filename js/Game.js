@@ -57,13 +57,20 @@ class Game {
 * @return {boolean} True if game has been won, false if game wasn't
 won
 */
-  //checkForWin() {};
+  checkForWin() {
+    const letterLeft = document.querySelectorAll(".hide");
+    if ((letterLeft = 0)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   /**
    * Increases the value of the missed property
    * Removes a life from the scoreboard
    * Checks if player has remaining lives and ends game if player is out
    */
-  //removeLife() {};
+  removeLife() {}
 
   /**
    * Displays game over message
