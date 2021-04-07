@@ -2,7 +2,7 @@
  * Project 4 - OOP Game App
  * app.js */
 //const phrase = new Phrase();
-const game = new Game();
+//const game = new Game();
 
 //console.log(`Phrase - phrase: ${phrase.phrase}`);
 /*game.phrases.forEach((phrase, index) => {
@@ -32,9 +32,11 @@ game.startGame();
 console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
 */
 
-game;
+let game;
 let buttonReset = document.querySelector("button#btn__reset");
 buttonReset.addEventListener("click", (e) => {
+  game = new Game();
+  game.resetGame();
   game.startGame();
 });
 

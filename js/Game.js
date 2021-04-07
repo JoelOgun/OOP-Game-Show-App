@@ -108,4 +108,18 @@ won
       }
     }
   }
+  // Resets Game
+  resetGame() {
+    const ul = document.querySelector("#phrase ul");
+    ul.innerHTML = "";
+    const keys = document.querySelectorAll(".key");
+    for (let i = 0; i < keys.length; i++) {
+      keys[i].disabled = false;
+      keys[i].classList.remove("chosen", "wrong");
+    }
+    const hearts = document.querySelectorAll("#scoreboard ol li");
+    for (let i = 0; i < hearts.length; i++) {
+      hearts[i].src = "images/liveHeart.png";
+    }
+  }
 }
