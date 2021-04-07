@@ -19,13 +19,6 @@ class Game {
       new Phrase("You have to see the matrix for yourself"),
       new Phrase("You talking to me"),
     ];
-    /* const phrases = [
-      { phrase: new Phrase("Life is like a box of chocolates") },
-      { phrase: new Phrase("There is no trying") },
-      { phrase: new Phrase("May the force be with you") },
-      { phrase: new Phrase("You have to see the matrix for yourself") },
-      { phrase: new Phrase("You talking to me") },
-    ]; */
     return phrases;
   }
 
@@ -36,7 +29,6 @@ class Game {
   getRandomPhrase() {
     let randomPhrase = Math.floor(Math.random() * this.phrases.length);
     return this.phrases[randomPhrase];
-    //this.phrases[randomPhrase];
   }
   /**
    * Begins game by selecting a random phrase and displaying it to user
@@ -45,12 +37,8 @@ class Game {
     document.querySelector("div#overlay").style.display = "none";
     this.getRandomPhrase();
     this.activePhrase = this.getRandomPhrase();
-    //const selectedPhrase = new Phrase();
     this.activePhrase.addPhraseToDisplay();
-    //this.activePhrase.addPhraseToDisplay();
   }
-
-  //handleInteraction()
 
   /**
 * Checks for winning move
@@ -90,17 +78,34 @@ won
     const overLay = document.getElementById("overlay");
     overLay.style.display = "";
     overLay.style.opacity = 1;
-    overLay.style.transition = "all 1s";
-    setTimeout(() => {
-      overLay.style.opacity = 1;
-    }, 100);
-    const h1 = document.getElementById("game-over-message");
+    const gameOverMessage = document.getElementById("game-over-message");
     if (gameWon) {
       overLay.className = "win";
-      h1.textContent = "Can you guess the phrase Winner? Congratulations !!";
+      gameOverMessage.textContent =
+        "Can you guess the phrase Winner? Congratulations !!";
     } else {
       overLay.className = "lose";
-      h1.textContent = "Sorry try again";
+      gameOverMessage.textContent = "Sorry try again";
+    }
+  }
+  /**
+   * Handles onscreen keyboard button clicks
+   * @param (HTMLButtonElement) button - The clicked button element
+   */
+  handleInteraction(button) {
+    console.log(button);
+    button.disabled = true;
+    const chosenLetter = this.activePhrase.checkLetter(button.textContent);
+    if (!chosenLetter) {
+      button.classList.add("wrong");
+      this.removeLife();
+    } else {
+      button.classList.add("chosen");
+      this.activePhrase.showMatchedLetter(button.textContent);
+      // if  player wins
+      if (this.checkForWin()) {
+        this.gameOver(true);
+      }
     }
   }
 }
