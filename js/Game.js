@@ -119,7 +119,10 @@ won
     }
     const hearts = document.querySelectorAll("#scoreboard ol li");
     for (let i = 0; i < hearts.length; i++) {
-      hearts[i].src = "images/liveHeart.png";
+      if (hearts[i].classList != "tries") {
+        hearts[i].classList.add("tries");
+        hearts[i].firstChild.src = "images/liveHeart.png";
+      }
     }
   }
 }
